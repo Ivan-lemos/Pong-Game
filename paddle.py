@@ -1,5 +1,6 @@
 from turtle import Turtle
 
+STEP_DISTANCE = 20  # Distância de movimento da raquete
 
 class Paddle(Turtle):
     """Representa uma raquete no jogo de Pong, herdando de Turtle para capacidades gráficas.
@@ -23,17 +24,25 @@ class Paddle(Turtle):
     def go_up(self) -> None:
         """Move a raquete para cima.
 
-        A raquete se move 20 unidades para cima no eixo Y.
+        A raquete se move para cima pela distância definida em STEP_DISTANCE,
+        desde que não ultrapasse o limite superior da tela.
         """
-        new_y = self.ycor() + 20
-        self.goto(self.xcor(), new_y)
+        new_y = self.ycor() + STEP_DISTANCE
+        # Verifica se a nova posição Y está dentro dos limites da tela
+        # O limite de 250 e -250 é uma estimativa baseada no tamanho da raquete e da tela
+        if new_y < 250:
+            self.sety(new_y)
 
     def go_down(self) -> None:
         """Move a raquete para baixo.
 
-        A raquete se move 20 unidades para baixo no eixo Y.
+        A raquete se move para baixo pela distância definida em STEP_DISTANCE,
+        desde que não ultrapasse o limite inferior da tela.
         """
-        new_y = self.ycor() - 20
-        self.goto(self.xcor(), new_y)
+        new_y = self.ycor() - STEP_DISTANCE
+        # Verifica se a nova posição Y está dentro dos limites da tela
+        if new_y > -250:
+            self.sety(new_y)
+
 
 
